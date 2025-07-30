@@ -1,6 +1,177 @@
-import { useState } from 'react';
-import './App.css';
+import React, { useState } from 'react';
+import GeneralInfoForm from './components/GeneralInfoForm';
+import emailIcon from './assets/images/email.svg';
+import phoneIcon from './assets/images/phone.svg';
+import linkedinIcon from './assets/images/linkedin.svg';
+import githubIcon from './assets/images/github.svg';
 
-function App() {}
+function App() {
+  const [mode, setMode] = useState('edit');
+  const [generalInfo, setGeneralInfo] = useState({
+    name: '',
+    address: '',
+    phone: '',
+    email: '',
+    linkedin: '',
+    github: '',
+  });
+
+  const handleSubmit = () => {
+    if (!generalInfo.name || !generalInfo.email) {
+      alert('Please fill in required fields: Name and Email');
+      return;
+    }
+    setMode('preview');
+  };
+
+  const handleEdit = () => {
+    setMode('edit');
+  };
+
+  const renderContactInfo = () => {
+    const contactItems = [];
+
+    if (generalInfo.phone) {
+      contactItems.push(
+        <span key="phone" className="inline-flex items-center mr-4">
+          <img src={phoneIcon} alt="Phone" className="w-4 h-4 mr-1" />
+          <a
+            href={`tel:${generalInfo.phone}`}
+            className="hover:text-blue-600 transition-colors"
+          >
+            {generalInfo.phone}
+          </a>
+        </span>
+      );
+    }
+
+    if (generalInfo.email) {
+      contactItems.push(
+        <span key="email" className="inline-flex items-center mr-4">
+          <img src={emailIcon} alt="Email" className="w-4 h-4 mr-1" />
+          <a
+            href={`mailto:${generalInfo.email}`}
+            className="hover:text-blue-600 transition-colors underline"
+          >
+            {generalInfo.email}
+          </a>
+        </span>
+      );
+    }
+
+    if (generalInfo.linkedin) {
+      contactItems.push(
+        <span key="linkedin" className="inline-flex items-center mr-4">
+          <img src={linkedinIcon} alt="LinkedIn" className="w-4 h-4 mr-1" />
+          <a
+            href={
+              generalInfo.linkedin.startsWith('http')
+                ? generalInfo.linkedin
+                : `https://${generalInfo.linkedin}`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition-colors underline"
+          >
+            {generalInfo.linkedin.replace(/^https?:\/\//, '')}
+          </a>
+        </span>
+      );
+    }
+
+    if (generalInfo.github) {
+      contactItems.push(
+        <span key="github" className="inline-flex items-center mr-4">
+          <img src={githubIcon} alt="GitHub" className="w-4 h-4 mr-1" />
+          <a
+            href={
+              generalInfo.github.startsWith('http')
+                ? generalInfo.github
+                : `https://${generalInfo.github}`
+            }
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-600 transition-colors underline"
+          >
+            {generalInfo.github.replace(/^https?:\/\//, '')}
+          </a>
+        </span>
+      );
+    }
+
+    return contactItems.length > 0 ? contactItems : null;
+  };
+
+  const capitalizeName = (name) => {
+    if (!name) return 'FIRST LAST';
+    return name.toUpperCase();
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <div className="bg-white shadow-sm">
+        <div className="max-w-4xl mx-auto px-6 py-4">
+          <h1 className="text-3xl font-bold text-center text-gray-900">
+            CV Application
+          </h1>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto p-6">
+        {mode === 'edit' ? (
+          <div className="space-y-6">
+            <GeneralInfoForm
+              generalInfo={generalInfo}
+              setGeneralInfo={setGeneralInfo}
+            />
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+            >
+              Submit
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            <div className="bg-white  p-8">
+              <div className="text-center text-4xl border-b border-gray-200 pb-6 mb-1">
+                <span
+                  style={{
+                    fontSize: 'calc(var(--total-scale-factor) * 72px)',
+                    fontFamily: 'Cinzel, serif',
+                    display: 'block',
+                    marginBottom: '2px',
+                  }}
+                  role="presentation"
+                  dir="ltr"
+                >
+                  {capitalizeName(generalInfo.name)}
+                </span>
+
+                {generalInfo.address && (
+                  <p className="text-black text-sm mb-1">
+                    {generalInfo.address}
+                  </p>
+                )}
+                <div className="flex justify-center items-center text-sm text-black space-x-4">
+                  {renderContactInfo()}
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleEdit}
+              className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition"
+            >
+              Edit
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default App;
