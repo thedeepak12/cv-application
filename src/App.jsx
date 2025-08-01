@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GeneralInfoForm from './components/GeneralInfoForm';
+import EducationForm from './components/EducationForm';
 import emailIcon from './assets/images/email.svg';
 import phoneIcon from './assets/images/phone.svg';
 import linkedinIcon from './assets/images/linkedin.svg';
@@ -15,6 +16,15 @@ function App() {
     linkedin: '',
     github: '',
   });
+  const [education, setEducation] = useState([
+    {
+      institution: '',
+      degree: '',
+      startDate: '',
+      endDate: '',
+      description: '',
+    },
+  ]);
 
   const handleSubmit = () => {
     if (!generalInfo.name || !generalInfo.email) {
@@ -124,6 +134,7 @@ function App() {
               generalInfo={generalInfo}
               setGeneralInfo={setGeneralInfo}
             />
+            <EducationForm education={education} setEducation={setEducation} />
             <button
               type="button"
               onClick={handleSubmit}
@@ -134,8 +145,8 @@ function App() {
           </div>
         ) : (
           <div className="space-y-8">
-            <div className="bg-white  p-8">
-              <div className="text-center text-4xl border-b border-gray-200 pb-6 mb-1">
+            <div className="bg-white p-8">
+              <div className="text-center text-4xl pb-6 mb-1">
                 <span
                   style={{
                     fontSize: 'calc(var(--total-scale-factor) * 72px)',
@@ -158,6 +169,41 @@ function App() {
                   {renderContactInfo()}
                 </div>
               </div>
+
+              {education.some((edu) => edu.degree || edu.institution) && (
+                <div className="-mt-2">
+                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                    Education
+                  </h2>
+                  <div className="space-y-1">
+                    {education.map(
+                      (edu, index) =>
+                        (edu.degree || edu.institution) && (
+                          <div key={index} className="mb-2">
+                            <div className="flex justify-between items-start mb-1">
+                              <h3 className="text-lg font-semibold text-gray-800">
+                                {edu.institution}
+                              </h3>
+                              <span className="text-sm text-gray-600">
+                                {edu.startDate &&
+                                  edu.endDate &&
+                                  `${edu.startDate} - ${edu.endDate}`}
+                              </span>
+                            </div>
+                            <p className="text-gray-700 font-medium mb-1">
+                              {edu.degree}
+                            </p>
+                            {edu.description && (
+                              <p className="text-gray-600 text-sm">
+                                {edu.description}
+                              </p>
+                            )}
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
 
             <button
