@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GeneralInfoForm from './components/GeneralInfoForm';
 import EducationForm from './components/EducationForm';
+import ExperienceForm from './components/ExperienceForm';
 import emailIcon from './assets/images/email.svg';
 import phoneIcon from './assets/images/phone.svg';
 import linkedinIcon from './assets/images/linkedin.svg';
@@ -22,6 +23,17 @@ function App() {
       degree: '',
       startDate: '',
       endDate: '',
+      description: '',
+    },
+  ]);
+
+  const [experience, setExperience] = useState([
+    {
+      company: '',
+      position: '',
+      startDate: '',
+      endDate: '',
+      location: '',
       description: '',
     },
   ]);
@@ -135,10 +147,14 @@ function App() {
               setGeneralInfo={setGeneralInfo}
             />
             <EducationForm education={education} setEducation={setEducation} />
+            <ExperienceForm
+              experience={experience}
+              setExperience={setExperience}
+            />
             <button
               type="button"
               onClick={handleSubmit}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition cursor-pointer"
             >
               Submit
             </button>
@@ -194,8 +210,50 @@ function App() {
                               {edu.degree}
                             </p>
                             {edu.description && (
-                              <p className="text-gray-600 text-sm">
+                              <p className="text-gray-600 text-sm whitespace-pre-line pl-4">
                                 {edu.description}
+                              </p>
+                            )}
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {experience.some((exp) => exp.company || exp.position) && (
+                <div className="mt-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                    Experience
+                  </h2>
+                  <div className="space-y-1">
+                    {experience.map(
+                      (exp, index) =>
+                        (exp.company || exp.position) && (
+                          <div key={index} className="mb-2">
+                            <div className="flex justify-between items-start mb-1">
+                              <h3 className="text-lg font-semibold text-gray-800">
+                                {exp.company}
+                              </h3>
+                              <span className="text-sm text-gray-600">
+                                {exp.startDate &&
+                                  exp.endDate &&
+                                  `${exp.startDate} - ${exp.endDate}`}
+                              </span>
+                            </div>
+                            <div className="flex justify-between items-start">
+                              <p className="text-gray-700 font-medium mb-1">
+                                {exp.position}
+                              </p>
+                              {exp.location && (
+                                <span className="text-sm text-gray-600">
+                                  {exp.location}
+                                </span>
+                              )}
+                            </div>
+                            {exp.description && (
+                              <p className="text-black text-sm whitespace-pre-line pl-4">
+                                {exp.description}
                               </p>
                             )}
                           </div>
