@@ -133,8 +133,8 @@ function EducationForm({ education, setEducation }) {
                     handleChange(index, 'description', e.target.value)
                   }
                   rows="3"
-                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-none"
-                  placeholder="Relevant coursework, achievements, GPA, etc."
+                  className="block w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-vertical"
+                  placeholder="Relevant coursework, achievements, GPA, etc. Press Enter for new lines."
                 />
               </div>
             </div>
