@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import GeneralInfoForm from './components/GeneralInfoForm';
 import EducationForm from './components/EducationForm';
 import ExperienceForm from './components/ExperienceForm';
+import ProjectsForm from './components/ProjectsForm';
 import emailIcon from './assets/images/email.svg';
 import phoneIcon from './assets/images/phone.svg';
 import linkedinIcon from './assets/images/linkedin.svg';
 import githubIcon from './assets/images/github.svg';
+import folderIcon from './assets/images/folder.svg';
+import openInNewIcon from './assets/images/open-in-new.svg';
 
 function App() {
   const [mode, setMode] = useState('edit');
@@ -35,6 +38,16 @@ function App() {
       endDate: '',
       location: '',
       description: '',
+    },
+  ]);
+
+  const [projects, setProjects] = useState([
+    {
+      title: '',
+      technologies: '',
+      description: '',
+      github: '',
+      liveLink: '',
     },
   ]);
 
@@ -151,6 +164,10 @@ function App() {
               experience={experience}
               setExperience={setExperience}
             />
+            <ProjectsForm
+              projects={projects}
+              setProjects={setProjects}
+            />
             <button
               type="button"
               onClick={handleSubmit}
@@ -254,6 +271,57 @@ function App() {
                             {exp.description && (
                               <p className="text-black text-sm whitespace-pre-line pl-4">
                                 {exp.description}
+                              </p>
+                            )}
+                          </div>
+                        )
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {projects.some((project) => project.title || project.technologies) && (
+                <div className="mt-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                    Projects
+                  </h2>
+                  <div className="space-y-1">
+                    {projects.map(
+                      (project, index) =>
+                        (project.title || project.technologies) && (
+                          <div key={index} className="mb-2">
+                            <div className="flex justify-between items-center mb-1">
+                              <h3 className="text-lg font-semibold text-gray-800">
+                                {project.title} {project.technologies && (
+                                  <span className="font-normal"> | {project.technologies}</span>
+                                )}
+                              </h3>
+                              <div className="flex items-center">
+                                {project.github && (
+                                  <a
+                                    href={project.github.startsWith('http') ? project.github : `https://${project.github}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                                  >
+                                    <img src={githubIcon} alt="GitHub" className="w-4 h-4 mr-1" />
+                                  </a>
+                                )}
+                                {project.liveLink && (
+                                  <a
+                                    href={project.liveLink.startsWith('http') ? project.liveLink : `https://${project.liveLink}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                                  >
+                                    <img src={openInNewIcon} alt="Live Link" className="w-4 h-4" />
+                                  </a>
+                                )}
+                              </div>
+                            </div>
+                            {project.description && (
+                              <p className="text-black text-sm whitespace-pre-line pl-4">
+                                {project.description}
                               </p>
                             )}
                           </div>
