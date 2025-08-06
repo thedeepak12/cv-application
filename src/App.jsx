@@ -3,6 +3,7 @@ import GeneralInfoForm from './components/GeneralInfoForm';
 import EducationForm from './components/EducationForm';
 import ExperienceForm from './components/ExperienceForm';
 import ProjectsForm from './components/ProjectsForm';
+import SkillsForm from './components/SkillsForm';
 import emailIcon from './assets/images/email.svg';
 import phoneIcon from './assets/images/phone.svg';
 import linkedinIcon from './assets/images/linkedin.svg';
@@ -50,6 +51,12 @@ function App() {
       liveLink: '',
     },
   ]);
+
+  const [skills, setSkills] = useState({
+    languages: '',
+    developerTools: '',
+    technologiesFrameworks: '',
+  });
 
   const handleSubmit = () => {
     if (!generalInfo.name || !generalInfo.email) {
@@ -164,10 +171,8 @@ function App() {
               experience={experience}
               setExperience={setExperience}
             />
-            <ProjectsForm
-              projects={projects}
-              setProjects={setProjects}
-            />
+            <ProjectsForm projects={projects} setProjects={setProjects} />
+            <SkillsForm skills={skills} setSkills={setSkills} />
             <button
               type="button"
               onClick={handleSubmit}
@@ -280,7 +285,9 @@ function App() {
                 </div>
               )}
 
-              {projects.some((project) => project.title || project.technologies) && (
+              {projects.some(
+                (project) => project.title || project.technologies
+              ) && (
                 <div className="mt-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
                     Projects
@@ -292,29 +299,49 @@ function App() {
                           <div key={index} className="mb-2">
                             <div className="flex justify-between items-center mb-1">
                               <h3 className="text-lg font-semibold text-gray-800">
-                                {project.title} {project.technologies && (
-                                  <span className="font-normal"> | {project.technologies}</span>
+                                {project.title}{' '}
+                                {project.technologies && (
+                                  <span className="font-normal">
+                                    {' '}
+                                    | {project.technologies}
+                                  </span>
                                 )}
                               </h3>
                               <div className="flex items-center">
                                 {project.github && (
                                   <a
-                                    href={project.github.startsWith('http') ? project.github : `https://${project.github}`}
+                                    href={
+                                      project.github.startsWith('http')
+                                        ? project.github
+                                        : `https://${project.github}`
+                                    }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
                                   >
-                                    <img src={githubIcon} alt="GitHub" className="w-4 h-4 mr-1" />
+                                    <img
+                                      src={githubIcon}
+                                      alt="GitHub"
+                                      className="w-4 h-4 mr-1"
+                                    />
                                   </a>
                                 )}
                                 {project.liveLink && (
                                   <a
-                                    href={project.liveLink.startsWith('http') ? project.liveLink : `https://${project.liveLink}`}
+                                    href={
+                                      project.liveLink.startsWith('http')
+                                        ? project.liveLink
+                                        : `https://${project.liveLink}`
+                                    }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
                                   >
-                                    <img src={openInNewIcon} alt="Live Link" className="w-4 h-4" />
+                                    <img
+                                      src={openInNewIcon}
+                                      alt="Live Link"
+                                      className="w-4 h-4"
+                                    />
                                   </a>
                                 )}
                               </div>
@@ -326,6 +353,38 @@ function App() {
                             )}
                           </div>
                         )
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {(skills.languages ||
+                skills.developerTools ||
+                skills.technologiesFrameworks) && (
+                <div className="mt-6">
+                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                    Technical Skills
+                  </h2>
+                  <div className="space-y-1 mt-2">
+                    {skills.languages && (
+                      <div className="mb-2">
+                        <span className="font-bold">Languages:</span>{' '}
+                        {skills.languages}
+                      </div>
+                    )}
+                    {skills.developerTools && (
+                      <div className="mb-2">
+                        <span className="font-bold">Developer Tools:</span>{' '}
+                        {skills.developerTools}
+                      </div>
+                    )}
+                    {skills.technologiesFrameworks && (
+                      <div className="mb-2">
+                        <span className="font-bold">
+                          Technologies/Frameworks:
+                        </span>{' '}
+                        {skills.technologiesFrameworks}
+                      </div>
                     )}
                   </div>
                 </div>
