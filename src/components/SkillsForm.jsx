@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import toolsIcon from '../assets/images/tools.svg';
 
 function SkillsForm({ skills, setSkills }) {
-  const [skillsData, setSkillsData] = useState({
-    languages: '',
-    developerTools: '',
-    technologiesFrameworks: '',
-  });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSkillsData({
-      ...skillsData,
-      [name]: value,
-    });
     setSkills({
       ...skills,
       [name]: value,
@@ -41,7 +31,7 @@ function SkillsForm({ skills, setSkills }) {
             type="text"
             id="languages"
             name="languages"
-            value={skillsData.languages}
+            value={skills.languages}
             onChange={handleChange}
             placeholder="Python, Java, C, HTML/CSS, JavaScript, SQL"
             className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
@@ -59,7 +49,7 @@ function SkillsForm({ skills, setSkills }) {
             type="text"
             id="developerTools"
             name="developerTools"
-            value={skillsData.developerTools}
+            value={skills.developerTools}
             onChange={handleChange}
             placeholder="VS Code, Eclipse, Google Cloud Platform, Android Studio"
             className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
@@ -77,7 +67,7 @@ function SkillsForm({ skills, setSkills }) {
             type="text"
             id="technologiesFrameworks"
             name="technologiesFrameworks"
-            value={skillsData.technologiesFrameworks}
+            value={skills.technologiesFrameworks}
             onChange={handleChange}
             placeholder="Linux, Jenkins, GitHub, JUnit, WordPress"
             className="w-full p-2 border rounded focus:ring-blue-500 focus:border-blue-500"
