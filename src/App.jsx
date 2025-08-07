@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GeneralInfoForm from './components/GeneralInfoForm';
 import EducationForm from './components/EducationForm';
 import ExperienceForm from './components/ExperienceForm';
@@ -8,7 +8,6 @@ import emailIcon from './assets/images/email.svg';
 import phoneIcon from './assets/images/phone.svg';
 import linkedinIcon from './assets/images/linkedin.svg';
 import githubIcon from './assets/images/github.svg';
-import folderIcon from './assets/images/folder.svg';
 import openInNewIcon from './assets/images/open-in-new.svg';
 
 function App() {
@@ -210,29 +209,29 @@ function App() {
 
               {education.some((edu) => edu.degree || edu.institution) && (
                 <div className="-mt-2">
-                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                  <h2 className="text-xl font-bold text-black mb-1 border-b-[1.4px] border-black pb-1">
                     Education
                   </h2>
                   <div className="space-y-1">
                     {education.map(
                       (edu, index) =>
                         (edu.degree || edu.institution) && (
-                          <div key={index} className="mb-2">
+                          <div key={`education-${index}`} className="mb-2">
                             <div className="flex justify-between items-start mb-1">
-                              <h3 className="text-lg font-semibold text-gray-800">
+                              <h3 className="text-lg font-semibold text-black">
                                 {edu.institution}
                               </h3>
-                              <span className="text-sm text-gray-600">
+                              <span className="text-sm text-black">
                                 {edu.startDate &&
                                   edu.endDate &&
                                   `${edu.startDate} - ${edu.endDate}`}
                               </span>
                             </div>
-                            <p className="text-gray-700 font-medium mb-1">
+                            <p className="text-black font-medium mb-1">
                               {edu.degree}
                             </p>
                             {edu.description && (
-                              <p className="text-gray-600 text-sm whitespace-pre-line pl-4">
+                              <p className="text-black text-sm whitespace-pre-line pl-4">
                                 {edu.description}
                               </p>
                             )}
@@ -245,30 +244,30 @@ function App() {
 
               {experience.some((exp) => exp.company || exp.position) && (
                 <div className="mt-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                  <h2 className="text-xl font-bold text-black mb-1 border-b-[1.4px] border-black pb-1">
                     Experience
                   </h2>
                   <div className="space-y-1">
                     {experience.map(
                       (exp, index) =>
                         (exp.company || exp.position) && (
-                          <div key={index} className="mb-2">
+                          <div key={`experience-${index}`} className="mb-2">
                             <div className="flex justify-between items-start mb-1">
-                              <h3 className="text-lg font-semibold text-gray-800">
+                              <h3 className="text-lg font-semibold text-black">
                                 {exp.company}
                               </h3>
-                              <span className="text-sm text-gray-600">
+                              <span className="text-sm text-black">
                                 {exp.startDate &&
                                   exp.endDate &&
                                   `${exp.startDate} - ${exp.endDate}`}
                               </span>
                             </div>
                             <div className="flex justify-between items-start">
-                              <p className="text-gray-700 font-medium mb-1">
+                              <p className="text-black font-medium mb-1">
                                 {exp.position}
                               </p>
                               {exp.location && (
-                                <span className="text-sm text-gray-600">
+                                <span className="text-sm text-black">
                                   {exp.location}
                                 </span>
                               )}
@@ -289,16 +288,16 @@ function App() {
                 (project) => project.title || project.technologies
               ) && (
                 <div className="mt-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                  <h2 className="text-xl font-bold text-black mb-1 border-b-[1.4px] border-black pb-1">
                     Projects
                   </h2>
                   <div className="space-y-1">
                     {projects.map(
                       (project, index) =>
                         (project.title || project.technologies) && (
-                          <div key={index} className="mb-2">
+                          <div key={`project-${index}`} className="mb-2">
                             <div className="flex justify-between items-center mb-1">
-                              <h3 className="text-lg font-semibold text-gray-800">
+                              <h3 className="text-lg font-semibold text-black">
                                 {project.title}{' '}
                                 {project.technologies && (
                                   <span className="font-normal">
@@ -317,7 +316,7 @@ function App() {
                                     }
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                                    className="ml-2 inline-flex items-center text-black transition-colors"
                                   >
                                     <img
                                       src={githubIcon}
@@ -335,7 +334,7 @@ function App() {
                                     }
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="ml-2 inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
+                                    className="ml-2 inline-flex items-center text-black transition-colors"
                                   >
                                     <img
                                       src={openInNewIcon}
@@ -362,25 +361,25 @@ function App() {
                 skills.developerTools ||
                 skills.technologiesFrameworks) && (
                 <div className="mt-6">
-                  <h2 className="text-xl font-bold text-gray-900 mb-1 border-b-[1.4px] border-black pb-1">
+                  <h2 className="text-xl font-bold text-black mb-1 border-b-[1.4px] border-black pb-1">
                     Technical Skills
                   </h2>
                   <div className="space-y-1 mt-2">
                     {skills.languages && (
                       <div className="mb-2">
-                        <span className="font-bold">Languages:</span>{' '}
+                        <span className="font-semibold text-black">Languages:</span>{' '}
                         {skills.languages}
                       </div>
                     )}
                     {skills.developerTools && (
                       <div className="mb-2">
-                        <span className="font-bold">Developer Tools:</span>{' '}
+                        <span className="font-semibold text-black">Developer Tools:</span>{' '}
                         {skills.developerTools}
                       </div>
                     )}
                     {skills.technologiesFrameworks && (
                       <div className="mb-2">
-                        <span className="font-bold">
+                        <span className="font-semibold text-black">
                           Technologies/Frameworks:
                         </span>{' '}
                         {skills.technologiesFrameworks}
@@ -391,13 +390,15 @@ function App() {
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={handleEdit}
-              className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition"
-            >
-              Edit
-            </button>
+            <div className="flex flex-col gap-4">
+              <button
+                type="button"
+                onClick={handleEdit}
+                className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition"
+              >
+                Edit
+              </button>
+            </div>
           </div>
         )}
       </div>
