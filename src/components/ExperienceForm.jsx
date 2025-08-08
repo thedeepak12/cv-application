@@ -54,7 +54,7 @@ function ExperienceForm({ experience, setExperience }) {
                 <button
                   type="button"
                   onClick={() => removeExperience(index)}
-                  className="text-red-600 hover:text-red-800 text-sm font-medium"
+                  className="text-red-600 hover:text-red-800 text-sm font-medium cursor-pointer"
                 >
                   Remove
                 </button>
@@ -158,7 +158,7 @@ function ExperienceForm({ experience, setExperience }) {
         <button
           type="button"
           onClick={addExperience}
-          className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium"
+          className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium cursor-pointer"
         >
           Add Experience
         </button>

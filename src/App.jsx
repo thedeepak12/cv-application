@@ -404,14 +404,14 @@ function App() {
               <button
                 type="button"
                 onClick={handleEdit}
-                className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition"
+                className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition cursor-pointer"
               >
                 Edit
               </button>
               <button
                 type="button"
                 onClick={handlePrint}
-                className="print-button w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+                className="print-button w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition cursor-pointer"
               >
                 Print CV
               </button>

@@ -55,7 +55,7 @@ function EducationForm({ education, setEducation }) {
                 <button
                   type="button"
                   onClick={() => removeEducation(index)}
-                  className="text-red-600 hover:text-red-800 text-sm font-medium"
+                  className="text-red-600 hover:text-red-800 text-sm font-medium cursor-pointer"
                 >
                   Remove
                 </button>
@@ -144,7 +144,7 @@ function EducationForm({ education, setEducation }) {
         <button
           type="button"
           onClick={addEducation}
-          className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium"
+          className="w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium cursor-pointer"
         >
           Add Education
         </button>
