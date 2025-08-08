@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './App.css';
 import GeneralInfoForm from './components/GeneralInfoForm';
 import EducationForm from './components/EducationForm';
 import ExperienceForm from './components/ExperienceForm';
@@ -67,6 +68,10 @@ function App() {
 
   const handleEdit = () => {
     setMode('edit');
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   const renderContactInfo = () => {
@@ -182,11 +187,12 @@ function App() {
           </div>
         ) : (
           <div className="space-y-8">
-            <div className="bg-white p-8">
+            <div id="cv-preview" className="bg-white p-8">
               <div className="text-center text-4xl pb-6 mb-1">
                 <span
                   style={{
                     fontSize: 'calc(var(--total-scale-factor) * 72px)',
+                    fontWeight: '500',
                     fontFamily: 'Cinzel, serif',
                     display: 'block',
                     marginBottom: '2px',
@@ -367,13 +373,17 @@ function App() {
                   <div className="space-y-1 mt-2">
                     {skills.languages && (
                       <div className="mb-2">
-                        <span className="font-semibold text-black">Languages:</span>{' '}
+                        <span className="font-semibold text-black">
+                          Languages:
+                        </span>{' '}
                         {skills.languages}
                       </div>
                     )}
                     {skills.developerTools && (
                       <div className="mb-2">
-                        <span className="font-semibold text-black">Developer Tools:</span>{' '}
+                        <span className="font-semibold text-black">
+                          Developer Tools:
+                        </span>{' '}
                         {skills.developerTools}
                       </div>
                     )}
@@ -397,6 +407,13 @@ function App() {
                 className="w-full bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 transition"
               >
                 Edit
+              </button>
+              <button
+                type="button"
+                onClick={handlePrint}
+                className="print-button w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+              >
+                Print CV
               </button>
             </div>
           </div>
